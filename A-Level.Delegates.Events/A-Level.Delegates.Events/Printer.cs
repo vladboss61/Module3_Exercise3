@@ -14,7 +14,7 @@ public sealed class PrinterEventArgs : EventArgs
 
 internal class Printer
 {
-    public EventHandler<EventArgs> DelegatePrinterStarted;
+    public EventHandler<EventArgs> DelegatePrinterStarted { get; set; }
 
     public event EventHandler<EventArgs> PrinterStarted;
 
@@ -25,6 +25,11 @@ internal class Printer
     public void Start()
     {
         PrinterStarted?.Invoke(this, new EventArgs());
+
+        //if (PrinterStarted != null) // ===  PrinterStarted?.Invoke(this, new EventArgs());
+        //{
+        //    PrinterStarted.Invoke(this, new EventArgs());
+        //}
     }
 
     public void Stop()

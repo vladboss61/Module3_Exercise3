@@ -26,7 +26,6 @@ internal sealed class Teapot
         }
     }
 
-
     private void Thermometer_OnDefender(object sender, TemperatureInfoEventArgs temperatureInfo)
     {
         if (temperatureInfo.Status == TemperatureStatus.Hot)

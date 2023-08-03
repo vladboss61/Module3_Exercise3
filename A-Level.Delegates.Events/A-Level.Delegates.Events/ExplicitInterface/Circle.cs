@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ public class Circle : IShape, IAnotherShape
     {
         _radius = radius;
     }
+
+    //// Explicit implementation of IShape's Draw method
+    //public void Draw() // private by default
+    //{
+    //    Console.WriteLine($"Drawing a circle with radius {_radius} using IShape interface");
+    //}
 
     // Explicit implementation of IShape's Draw method
     void IShape.Draw() // private by default

@@ -36,7 +36,7 @@ internal sealed class Thermometer
 
     public void HeatThermometer(int power)
     {
-        _currentCelsium = _currentCelsium + Themp(power);
+        _currentCelsium += Themp(power);
 
         if (_currentCelsium >= MaxCelsium)
         {

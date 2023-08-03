@@ -3,15 +3,21 @@ using System.Collections.Generic;
 
 namespace A_Level.Delegates.Events;
 
+public static class Test
+{
+    public static string Name { get; set; } = "12313";
+}
+
 internal static class ClosureExample
 {
     public static void MainClosureExample()
     {
-        string name = "Den";
+        var name = "Den";
 
         Action<int, int> action = (int x, int y) =>
         {
-            Console.WriteLine("1 MainClosureExample -> " + $" Name: {name} {x} {y}");
+            string hello = "hello";
+            Console.WriteLine("1 MainClosureExample -> " + $" Name: {Test.Name} {hello} {x} {y}");
             Console.WriteLine("2 MainClosureExample -> " + $" Name: {name} {x} {y}");
             Console.WriteLine("3 MainClosureExample -> " + $" Name: {name} {x} {y}");
         };
@@ -19,16 +25,17 @@ internal static class ClosureExample
         action(10, 20);
 
         name = "John";
+        Test.Name = "999999";
 
         action(30, 40);
 
-        //var screen = new ClosureUnderTheScreen();
-        
-        //screen.name = "Den";
-        //screen.ClosureMethod(10, 20);
-     
-        //screen.name = "John";
-        //screen.ClosureMethod(30, 40);
+        var screen = new ClosureUnderTheScreen();
+
+        screen.name = "Den";
+        screen.ClosureMethod(10, 20);
+
+        screen.name = "John";
+        screen.ClosureMethod(30, 40);
     }
 
     public class ClosureUnderTheScreen
@@ -39,9 +46,8 @@ internal static class ClosureExample
         {
             Console.WriteLine("3 MainClosureExample -> " + $" Name: {name} {x} {y}");
             Console.WriteLine("1 MainClosureExample -> " + $" Name: {name} {x} {y}");
-            Console.WriteLine("3 MainClosureExample -> " + $" Name: {name} {x} {y}");
+            Console.WriteLine("2 MainClosureExample -> " + $" Name: {name} {x} {y}");
         }
-
     }
 
     public static void WrongExample()
@@ -65,7 +71,7 @@ internal static class ClosureExample
 
         for (int i = 0; i < 3; i++)
         {
-            var j = i;
+            int j = i;
             funcs.Add(() => j);
         }
 

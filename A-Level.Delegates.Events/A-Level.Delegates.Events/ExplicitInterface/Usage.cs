@@ -10,7 +10,7 @@ public static class Usage
 {
     public static void UsageClasses()
     {
-        var circle = new Circle(5.0);
+        Circle circle = new Circle(5.0);
 
         //circle.Draw(); // Always private.
 
