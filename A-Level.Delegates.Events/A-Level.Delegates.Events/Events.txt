@@ -1,0 +1,65 @@
+using System;
+
+// Define the EventArgs class for passing additional event data
+public class MyEventArgs : EventArgs
+{
+    public string EventMessage { get; set; }
+
+    public MyEventArgs(string message)
+    {
+        EventMessage = message;
+    }
+}
+
+// Define a class that will contain the event
+public class EventPublisher
+{
+    // Declare an event using the EventHandler delegate
+    public event EventHandler<MyEventArgs> MyEvent;
+
+    // Method to trigger the event
+    public void RaiseEvent(string message)
+    {
+        // Check if there are subscribers to the event
+        if (MyEvent != null)
+        {
+            // Create an instance of MyEventArgs to pass additional data
+            MyEventArgs eventArgs = new MyEventArgs(message);
+
+            // Raise the event, passing the sender (this) and eventArgs
+            MyEvent(this, eventArgs);
+        }
+    }
+}
+
+// Define a class that will subscribe to the event
+public class EventSubscriber
+{
+    // Method that will be called when the event is raised
+    public void HandleEvent(object sender, MyEventArgs e)
+    {
+        Console.WriteLine($"Event handled by {nameof(EventSubscriber)}: {e.EventMessage}");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Create instances of the publisher and subscriber
+        EventPublisher publisher = new EventPublisher();
+        EventSubscriber subscriber = new EventSubscriber();
+
+        // Subscribe to the event
+        publisher.MyEvent += subscriber.HandleEvent;
+
+        // Trigger the event
+        publisher.RaiseEvent("Hello, event!");
+
+        // Unsubscribe from the event
+        publisher.MyEvent -= subscriber.HandleEvent;
+
+        // Trigger the event again (no subscriber, so nothing happens)
+        publisher.RaiseEvent("Event without subscriber");
+    }
+}

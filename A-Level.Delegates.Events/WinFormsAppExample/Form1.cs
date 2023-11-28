@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,13 +12,15 @@ public partial class Form1 : Form
     {
         MouseMove += (sender, args) =>
         {
+            Debug.WriteLine(sender.GetType());
             Debug.WriteLine(args.Location);
         };
 
-        //MouseWheel += (sender, args) =>
-        //{
-        //    Debug.WriteLine(args.Location);
-        //};
+        MouseWheel += (sender, args) =>
+        {
+            Debug.WriteLine(sender.GetType());
+            Debug.WriteLine(args.Location);
+        };
 
         InitializeComponent();
     }
@@ -30,6 +33,7 @@ public partial class Form1 : Form
 
     private async void button2_Click(object sender, System.EventArgs e)
     {
+        Debug.WriteLine(sender.GetType());
         await Task.Delay(5000);
         label1.Text = "Async Click";
     }
